@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 
 const {
+  LOG_LEVEL,
   DB_NAME,
   DB_USER,
   DB_PASSWORD,
@@ -11,5 +12,6 @@ const {
 module.exports = new Sequelize(DB_NAME || 'api_example', DB_USER || 'api_example', DB_PASSWORD || 'api_example', {
   host: DB_HOST || 'localhost',
   port: DB_PORT ? parseInt(DB_PORT, 10) : 3306,
-  dialect: 'mysql'
+  dialect: 'mysql',
+  logging: LOG_LEVEL === 'debug'
 })
