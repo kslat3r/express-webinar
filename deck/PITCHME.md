@@ -1,23 +1,27 @@
-## Building your First Alexa Skill using the Serverless Framework
+## Getting started with Express.js as a Java developer
 
-### December 6th 2018
+### 27th June 2019
+
+---
+
+### Please feel free to jump in with any questions at any point during the webinar
 
 ---
 
 ### What we will cover
 
-* How to use the Serverless Framework
-* How to configure your Alexa skill on the AWS platform
-* How to build your Alexa skill and get it to recognise basic commands
-
-*Bear in mind that this is a code-along!*
+* How the V8 runtime works and how the event loop processes your code
+* How NPM operates in comparison to Maven
+* How the Express.js application middleware stack works
+* A walkthrough of a simple RESTful application with database connectivity
 
 ---
 
 ### What this is not
 
-* An analysis of the various FaaS providers
-* How to publish your Alexa skill to Amazon
+* A walkthrough of basic JavaScript concepts
+* A comparison between Express.js/Loopback and Spring/Spring Boot
+* A production-ready implementation (e.g. no tests!)
 
 ---
 
@@ -25,14 +29,14 @@
 
 ---
 
-* A terminal
-* A web browser
-* A text editor (Visual Studio Code)
-* Node.js v8.9.4
-* NPM v5.6.0
-* **An AWS account** - get a free trial here https://aws.amazon.com/s/dm/optimization/server-side-test/free-tier/free_np/
-
-*Please double check you have the correct versions of Node/NPM*
+* Java 8 installed on your system
+  * `brew tap caskroom/versions`
+  * `brew cask install java8`
+* Maven 3 installed on your system
+  * `brew install maven` (if it is not already installed, check with `maven -version`)
+* A Java IDE (I use IntelliJ community edition, but Eclipse is also good)
+  * https://www.jetbrains.com/idea/
+  * https://www.eclipse.org/downloads/
 
 ---
 
@@ -42,106 +46,158 @@
 
 ### Please clone the following repository from Github
 
-#### https://github.com/kslat3r/serverless-alexa-skill-hackathon
-
-* Checkout the branch `step-one`
-
----
-
-## Creating your Servless framework template
+#### https://github.com/kslat3r/spring-boot-webinar
+#### Navigate to the `src/` directory in a text editor or import the project into your IDE
 
 ---
 
-### Steps to complete:
+## JVM
 
-* `npm install -g serverless`
-* `serverless create --template aws-nodejs --path src`
-* Update src/serverless.yml with correct service name
+>  Java virtual machine (JVM) is a virtual machine that enables a computer to run Java programs as well as programs written in other languages that are also compiled to Java bytecode.
 
 ---
 
-## Setting up your provider credentials
+#### JVM architecture
+
+![JVM architecture](https://github.com/kslat3r/spring-boot-webinar/raw/master/deck/assets/image/jvm-architecture.png)
 
 ---
 
-![Provider credentials](https://www.youtube.com/embed/KngM5bfpttA)
+#### Features of the JVM
+
+* Platform independence 
+  * Write once, run anywhere
+* Memory management
+  * Memory allocation
+  * Garbage collection
+* Exception handling
+  * Issues in your application will not affect the underlying OS
 
 ---
 
-### Steps to complete:
-
-* Login via http://aws.amazon.com
-* Search for IAM
-* Add new user "serverless"
-* Click "programmatic access"
-* Attach a policy
-* Click on "AdministratorAccess"
-* Create the user
-* Download the credentials
-* `serverless config credentials --provider aws --key xxx --secret yyy`
+* Security
+  * Sandbox environment for execution of application code that disallows interaction with OS resources
+* Memory safe references
+* Multiple implementations (languages)
+  * Scala
+  * Kotlin
+  * Jython
+  * Jruby
 
 ---
 
-## Publishing our example function
+#### Benefits of the JVM
 
-* Checkout the branch `step-two`
-
----
-
-### Steps to complete:
-
-* `cd src`
-* Deploy the function
-  * `serverless deploy -v`
-  * `serverless deploy function -f hello`
-* Invoke the function
-  * `serverless invoke -f hello -l`
-* Fetch the logs
-  * `serverless logs -f hello`
+* Run your code on any operating system that implements the JVM specification
+* Multiple choices of implementation of the specification
+  * OpenJDK HotSpot
+  * Oracle JDK/JRE
+* JIT compilation
 
 ---
 
-## Building our random fact generator
+#### Negatives of the JVM
+
+* Performance
+  * Java bytecode cannot be optimised for a specific hardware set
+* Single point of failure
+  * If the JVM has a bug, it may cause your application to fail
+* Memory footprint
+* Startup time
 
 ---
 
-### Specs to complete:
-
-* Build our random fact generator code
-* Remove our test function
-* Test our new function
+## Maven
 
 ---
 
-### Creating our Alexa skill
-
-* Checkout the branch `step-three`
+>  Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
 
 ---
 
-### Specs to complete:
+## POM
 
-* Navigate to https://developer.amazon.com/alexa/console/ask
-* Login
-* Create skill
-* Enter skill name
-* Use custom skill model
-* Start from scratch
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.5.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.sapient.springbootwebinar</groupId>
+	<artifactId>exampleapi</artifactId>
+	<version>1.0.0</version>
+	<name>exampleapi</name>
+	<description>Example API</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
+```
 
 ---
- 
-* Add Skill Invocation Name
-* Add RandomFactIntent
-* Retrieve ARN of Lambda function
-* Update serverless.yml
-* Redeploy randomFact function
-* Add ARN to Endpoint dialog
+
+#### Features of Maven
+
+* Simple project setup
+* Dependency management
+* Large repository of managed third-party libraries
+* Build system for JARs, WARs and distrubuted build models
+* Extensible with plugin system
+* Release management and distribution publication
+
+https://maven.apache.org/maven-features.html
 
 ---
 
-* Save model
-* Build model
-* Test model!
+#### How Maven is not NPM
+
+* XML vs JSON
+* Built in build/deploy system over custom scripts
+* More declarative syntax
+* Dependency resolution
+  * Picks a single version of a dependency
+* More mature and quality-controlled ecosystem (Maven Central, Nexus)
+
+---
+
+## Spring Boot Generator
+
+https://start.spring.io/
+
+---
+
+### Walkthrough of a simple Spring Boot RESTful application
 
 ---
 
@@ -149,4 +205,4 @@
 
 ### Please complete the following survey
 
-### https://www.surveymonkey.co.uk/r/YJ9WQMJ
+### https://www.surveymonkey.co.uk/r/VKFRQKS

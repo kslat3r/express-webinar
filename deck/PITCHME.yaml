@@ -1,7 +1,7 @@
 theme : moon
 theme-override : /assets/css/PITCHME.css
 highlight : ir-black
-background : /assets/image/binary-strings-black.jpg
+background : https://github.com/kslat3r/spring-boot-webinar/raw/master/deck/assets/image/binary-strngs-black.jpg
 background-opacity : 15
 transition : none
 published : true

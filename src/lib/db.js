@@ -1,45 +1,15 @@
-const EventEmitter = require('events')
-const mysql = require('promise-mysql')
+const Sequelize = require('sequelize')
 
-class DB extends EventEmitter {
-  constructor (config, logger) {
-    super()
+const {
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_PORT
+} = process.env
 
-    this.logger = logger
-
-    mysql.createConnection(config)
-      .then((adapter) => {
-        this.adapter = adapter
-
-        this.emit('connection')
-      })
-      .catch(err => this.emit('error', err))
-  }
-
-  select (table, fields = [], wheres, order, direction, offset, limit) {
-    let sql = `SELECT ${fields.join(', ')} \
-                FROM ${table}`
-
-    if (wheres) {
-      sql += ` WHERE ${Object.keys(wheres).map((key) => `${key}=${typeof wheres[key] === 'string' && !wheres[key].includes('()') ? mysql.escape(wheres[key]) : wheres[key]}`).join(' AND ')}`
-    }
-
-    if (order && direction) {
-      sql += ` ORDER BY ${order} ${direction}`
-    }
-
-    if (offset !== undefined && limit) {
-      sql += ` LIMIT ${offset}, ${limit}`
-    }
-
-    return this.execute(sql)
-  }
-
-  execute (sql) {
-    this.logger.debug(`Executing SQL query "${sql}"`)
-
-    return this.adapter.query(sql)
-  }
-}
-
-module.exports = DB
+module.exports = new Sequelize(DB_NAME || 'api_example', DB_USER || 'api_example', DB_PASSWORD || 'api_example', {
+  host: DB_HOST || 'localhost',
+  port: DB_PORT ? parseInt(DB_PORT, 10) : 3306,
+  dialect: 'mysql'
+})

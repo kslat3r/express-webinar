@@ -1,35 +1,11 @@
 const winston = require('winston')
 
-class Logger {
-  constructor (config) {
-    this.adapter = winston.createLogger({
-      level: config.level,
-      format: winston.format.json(),
-      transports: [
-        new winston.transports.Console()
-      ]
-    })
-  }
+const { LOG_LEVEL } = process.env
 
-  log (msg) {
-    this.adapter.log(msg)
-  }
-
-  debug (msg) {
-    this.adapter.debug(msg)
-  }
-
-  info (msg) {
-    this.adapter.info(msg)
-  }
-
-  warn (msg) {
-    this.adapter.warn(msg)
-  }
-
-  error (msg) {
-    this.adapter.error(msg)
-  }
-}
-
-module.exports = Logger
+module.exports = winston.createLogger({
+  level: LOG_LEVEL || 'debug',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.Console()
+  ]
+})
