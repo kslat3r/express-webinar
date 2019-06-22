@@ -13,6 +13,7 @@
 * How the V8 runtime works and how the event loop processes your code
 * How NPM operates in comparison to Maven
 * How the Express.js application middleware stack works
+* How to quickly create an Express.js application using express-generator
 * A walkthrough of a simple RESTful application with database connectivity
 
 ---
