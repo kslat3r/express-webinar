@@ -52,6 +52,8 @@
 
 ## The Event Loop
 
+---
+
 ### Three main concepts
 
 * The call stack
@@ -97,7 +99,7 @@ Note:
 
 ---
 
-![Event loop](assets/image/eventloop.png)
+![Event loop](/assets/image/eventloop.png)
 
 ---
 
