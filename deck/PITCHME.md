@@ -69,12 +69,6 @@
 * Records where we are in our program
 * If we step into a function, we push something onto the stack. If we return from a function, we pop off the top of the stack.
 
-Note:
-
-* Think of 3 functions - push on x3, pop off x3
-* Think of a stack trace as the state of the call stack
-* Blowing the stack - calling the same function over and over again recursively - maximum call stack size exceeded
-
 ---
 
 ### The callback queue
@@ -82,10 +76,6 @@ Note:
 * Receives callbacks to process from Web APIs e.g. setTimeout()
 * Keeps references to any callbacks that need to be processed in a queue
 * Event based - callbacks are added when actions complete
-
-Note: 
-
-* WebAPIs in browser, C++ APIs in Node.js
 
 ---
 
@@ -110,6 +100,12 @@ Note:
 ---
 
 #### Features of NPM
+
+* Dependency management using semantic versioning
+* Lifecycle events
+* Custom scripts
+* Distinction between development and runtime dependencies
+* Application configuration
 
 ---
 
@@ -156,6 +152,30 @@ Note:
 ---
 
 ## Express.js middleware stack
+
+```javascript
+const app = express()
+
+app.use(cors())
+app.use(csrf())
+app.use(auth())
+
+app.get('/api/v1.0/accounts', (req, res) => {
+  res.send([])
+})
+
+app.use((req, res, next) => {
+  next(createError(404))
+})
+
+app.use((err, req, res, next) => {
+  res.send({ error: err.message })
+})
+```
+
+---
+
+![Express middleware](https://github.com/kslat3r/express-webinar/raw/master/deck/assets/image/expressmiddleware.png)
 
 ---
 
