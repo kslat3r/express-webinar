@@ -21,7 +21,7 @@
 ### What this is not
 
 * A walkthrough of basic JavaScript concepts
-* A comparison between Express.js/Loopback and Spring/Spring Boot
+* A comparison between Express.js and Spring/Spring Boot
 * A production-ready implementation (e.g. no tests!)
 
 ---
@@ -104,6 +104,50 @@ Note:
 ---
 
 ## NPM
+
+> npm is the world’s largest software registry. Open source developers from every continent use npm to share and borrow packages, and many organizations use npm to manage private development as well.
+
+---
+
+#### Features of NPM
+
+---
+
+#### Benefits of NPM
+
+---
+
+#### Disadvantages of NPM
+
+---
+
+```json
+{
+  "name": "express-webinar-example-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
+    "express": "~4.16.1",
+    "express-validator": "^6.0.1",
+    "express-winston": "^3.1.0",
+    "http-errors": "~1.6.3",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.8.12",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^12.0.0",
+    "nodemon": "^1.19.0",
+    "standard": "^12.0.1"
+  }
+}
+```
 
 ---
 

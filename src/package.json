@@ -1,5 +1,5 @@
 {
-  "name": "subreddit-sentiment-analysis-api",
+  "name": "express-webinar-example-api",
   "version": "1.0.0",
   "private": true,
   "scripts": {
