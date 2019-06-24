@@ -30,7 +30,7 @@
 
 ---
 
-* Node.js v10.16.0 (minimum)
+* Node.js v10.16.0 LTS (minimum)
   * `brew install node`
 * NPM v6.9.0
   * Will be installed as part of above command
@@ -153,7 +153,7 @@
 * Nested dependencies (fixed in NPM v3)
 * Central, single public package repository
 * Non-declarative syntax
-* Lack of quality assurance
+* Lack of quality assurance of third party packages
 * Package security
 * Package maintainability/future-proofing
 
