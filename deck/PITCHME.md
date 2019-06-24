@@ -10,10 +10,10 @@
 
 ### What we will cover
 
-* How the V8 runtime works and how the event loop processes your code
-* How NPM operates in comparison to Maven
-* How the Express.js application middleware stack works
-* How to quickly create an Express.js application using express-generator
+* How the JavaScript event loop processes your code
+* How NPM manages your dependencies and tooling
+* How to quickly generate an Express.js app
+* How the Express.js middleware stack works
 * A walkthrough of a simple RESTful application with database connectivity
 
 ---
@@ -30,14 +30,12 @@
 
 ---
 
-* Java 8 installed on your system
-  * `brew tap caskroom/versions`
-  * `brew cask install java8`
-* Maven 3 installed on your system
-  * `brew install maven` (if it is not already installed, check with `maven -version`)
-* A Java IDE (I use IntelliJ community edition, but Eclipse is also good)
-  * https://www.jetbrains.com/idea/
-  * https://www.eclipse.org/downloads/
+* Node.js v10.16.0 (minimum)
+  * `brew install node`
+* NPM v6.9.0
+  * Will be installed as part of above command
+* A text editor
+  * https://code.visualstudio.com/
 
 ---
 
@@ -47,43 +45,59 @@
 
 ### Please clone the following repository from Github
 
-#### https://github.com/kslat3r/spring-boot-webinar
-#### Navigate to the `src/` directory in a text editor or import the project into your IDE
+#### https://github.com/kslat3r/express-webinar
+#### Navigate to the `src/` directory in your text editor
 
 ---
 
-## JVM
+## The Event Loop
 
->  Java virtual machine (JVM) is a virtual machine that enables a computer to run Java programs as well as programs written in other languages that are also compiled to Java bytecode.
+### Three main concepts
 
----
-
-#### JVM architecture
-
-![JVM architecture](https://github.com/kslat3r/spring-boot-webinar/raw/master/deck/assets/image/jvm-architecture.png)
+* The call stack
+* The callback queue
+* The event loop
 
 ---
 
-#### Features of the JVM
+### The call stack
 
-* Platform independence 
-  * Write once, run anywhere
-* Memory management
-  * Memory allocation
-  * Garbage collection
-* Exception handling
-  * Issues in your application will not affect the underlying OS
+* Executes code
+* Can only execute one piece of code at a time (single threaded)
+* Records where we are in our program
+* If we step into a function, we push something onto the stack. If we return from a function, we pop off the top of the stack.
+
+Note:
+
+* Think of 3 functions - push on x3, pop off x3
+* Think of a stack trace as the state of the call stack
+* Blowing the stack - calling the same function over and over again recursively - maximum call stack size exceeded
 
 ---
 
-* Security
-  * Sandbox environment for execution of application code that disallows interaction with OS resources
-* Memory safe references
-* Multiple implementations (languages)
-  * Scala
-  * Kotlin
-  * Jython
-  * Jruby
+### The callback queue
+
+* Receives callbacks to process from Web APIs e.g. setTimeout()
+* Keeps references to any callbacks that need to be processed in a queue
+* Event based - callbacks are added when actions complete
+
+Note: 
+
+* WebAPIs in browser, C++ APIs in Node.js
+
+---
+
+### The Event Loop
+
+* One simple job - to monitor the call stack and the callback queue.
+* If the call stack is empty:
+  * Takes the first event on the callback queue and pushes it to the call stack.
+  * The call stack then executes the callback.
+* Performs this repeatedly until the call stack and callback queue are empty.
+
+---
+
+![Event loop](assets/image/eventloop.png)
 
 ---
 
