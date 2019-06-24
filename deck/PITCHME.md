@@ -50,7 +50,7 @@
 
 ---
 
-## The Event Loop
+## Executing your JavaScript code
 
 ---
 
@@ -79,7 +79,7 @@
 
 ---
 
-### The Event Loop
+### The event loop
 
 * One simple job - to monitor the call stack and the callback queue.
 * If the call stack is empty:
@@ -101,19 +101,11 @@
 
 #### Features of NPM
 
+* Over 10 million publicly available open-source modules
 * Dependency management using semantic versioning
-* Lifecycle events
-* Custom scripts
+* Lifecycle events & custom scripts
 * Distinction between development and runtime dependencies
 * Application configuration
-
----
-
-#### Benefits of NPM
-
----
-
-#### Disadvantages of NPM
 
 ---
 
@@ -147,7 +139,30 @@
 
 ---
 
+#### Benefits of NPM
+
+* Large ecosystem
+* Very performant (after NPM v3)
+* Simple package lifecycle/publishing
+* Enterprise licensing model
+
+---
+
+#### Disadvantages of NPM
+
+* Nested dependencies (fixed in NPM v3)
+* Central, single public package repository
+* Non-declarative syntax
+* Lack of quality assurance
+* Package security
+* Package maintainability/future-proofing
+
+---
+
 ## express-generator
+
+`npm install --global express-generator`
+`express-generator api-example`
 
 ---
 
