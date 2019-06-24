@@ -99,7 +99,7 @@ Note:
 
 ---
 
-![Event loop](/assets/image/eventloop.png)
+![Event loop](https://github.com/kslat3r/express-webinar/raw/master/deck/assets/image/eventloop.png)
 
 ---
 
